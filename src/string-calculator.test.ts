@@ -22,4 +22,7 @@ describe('String Calculator', () => {
     it('should show all negative numbers in exception message', () => {
         expect(() => add('1,-2,-3')).toThrowError('negatives not allowed: -2,-3');
     });
+    it('should ignore numbers greater than 1000', () => {
+        expect(add('2,1001')).toBe(2);
+    });
 });
