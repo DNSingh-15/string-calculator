@@ -1,8 +1,17 @@
 export function add(numbers: string): number {
-    if (numbers === '') return 0;
+  if (numbers === '') return 0;
 
-    const nums = numbers.split(/[,\n]/)
-        .map(num => parseInt(num, 10));
+  let delimiter = /[,\n]/;
+  let numbersString = numbers;
 
-    return nums.reduce((sum, num) => sum + num, 0);
+  if (numbers.startsWith('//')) {
+    const delimiterEndIndex = numbers.indexOf('\n');
+    delimiter = new RegExp(numbers.substring(2, delimiterEndIndex));
+    numbersString = numbers.substring(delimiterEndIndex + 1);
+  }
+
+  const nums = numbersString.split(delimiter)
+    .map(num => parseInt(num, 10));
+  
+  return nums.reduce((sum, num) => sum + num, 0);
 }
